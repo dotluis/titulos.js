@@ -108,12 +108,11 @@
 
 function d(ano, mes, dia) { return new Date(ano, mes-1, dia, 12, 0, 0); }
 function getFeriados() {
-	
-	/*
-     * Array com feriados brasileiros
-     * fonte: http://www.anbima.com.br/feriados/feriados.asp
-     */
-    var feriados = [
+  /*
+   * Array com feriados brasileiros
+   * fonte: http://www.anbima.com.br/feriados/feriados.asp
+   */
+  var feriados = [
   d(2001,1,1),d(2001,2,26),d(2001,2,27),d(2001,4,13),d(2001,5,1),d(2001,6,14),d(2001,9,7),d(2001,10,12),d(2001,11,2),d(2001,11,15),d(2001,12,25),
   d(2002,1,1),d(2002,2,11),d(2002,2,12),d(2002,3,29),d(2002,5,1),d(2002,5,30),d(2002,11,15),d(2002,12,25),
   d(2003,1,1),d(2003,3,3),d(2003,3,4),d(2003,4,18),d(2003,4,21),d(2003,5,1),d(2003,6,19),d(2003,12,25),
