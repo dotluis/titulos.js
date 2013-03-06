@@ -12,6 +12,7 @@
   function titulosConstructor(tipo_titulo) {
     this.tipo_titulo = tipo_titulo;
     this.data_base = new Date();
+    this.data_vencimento = new Date();
     return this;
   }
 
@@ -70,8 +71,45 @@
   }
 
   function feriadosEntre(dataInicial, dataFinal) {
+    var feriados = getFeriados();
+    var  dias = 0;
+    for(var i = 0; i < feriados.length; i++) {
+      if (feriados[i] > dataFinal) {
+        return dias;
+      }
+      if (feriados[i] > dataInicial) {
+        dias++;
+      }
+    }
+  }
 
-    /*
+  function d(ano, mes, dia) { return new Date(ano, mes-1, dia, 12, 0, 0); }
+
+  // Revelar
+  window.titulos = titulos;
+
+  // Extensões
+  Number.prototype.truncar = function(casas) {
+    var n = this * Math.pow(10, casas);
+    n = Math.floor(n) /  Math.pow(10, casas);
+    return n;
+  }
+
+  Date.prototype.addDays = function(dias) {
+    if(!dias){ dias = 1; }
+    var data = new Date(this.valueOf());
+    data.setHours(12);
+    data.setDate(data.getDate() + dias);
+    return data;
+  }
+
+})();
+
+
+function d(ano, mes, dia) { return new Date(ano, mes-1, dia, 12, 0, 0); }
+function getFeriados() {
+	
+	/*
      * Array com feriados brasileiros
      * fonte: http://www.anbima.com.br/feriados/feriados.asp
      */
@@ -154,39 +192,7 @@
   d(2076,1,1),d(2076,3,2),d(2076,3,3),d(2076,4,17),d(2076,4,21),d(2076,5,1),d(2076,6,18),d(2076,9,7),d(2076,10,12),d(2076,11,2),d(2076,12,25),
   d(2077,1,1),d(2077,2,22),d(2077,2,23),d(2077,4,9),d(2077,4,21),d(2077,6,10),d(2077,9,7),d(2077,10,12),d(2077,11,2),d(2077,11,15),
   d(2078,1,1),d(2078,2,14),d(2078,2,15),d(2078,4,1),d(2078,4,21),d(2078,5,1),d(2078,6,2),d(2078,9,7),d(2078,10,12),d(2078,11,2),d(2078,11,15),d(2078,12,25)];
-    var  dias = 0;
-    for(var i = 0; i < feriados.length; i++) {
-      if (feriados[i] > dataFinal) {
-        return dias;
-      }
-      if (feriados[i] > dataInicial) {
-        dias++;
-      }
 
-    }
-  }
-
-  function d(ano, mes, dia) { return new Date(ano, mes-1, dia, 12, 0, 0); }
-
-  // Revelar
-  window.titulos = titulos;
-
-  // Extensões
-  Number.prototype.truncar = function(casas) {
-    var n = this * Math.pow(10, casas);
-    n = Math.floor(n) /  Math.pow(10, casas);
-    return n;
-  }
-
-  Date.prototype.addDays = function(dias) {
-    if(!dias){ dias = 1; }
-    var data = new Date(this.valueOf());
-    data.setHours(12);
-    data.setDate(data.getDate() + dias);
-    return data;
-  }
-
-})();
-
-function d(ano, mes, dia) { return new Date(ano, mes-1, dia, 12, 0, 0); }
-titulos('LTN').vencimento(d(2013,4,1)).taxa(0.090308).retorna_PU();
+  return feriados;
+	
+}
