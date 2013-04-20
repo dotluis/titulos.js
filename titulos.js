@@ -40,7 +40,7 @@
     retorna_PU: function() {
 
       var i = this.valor_taxa;
-      var DU = dias_uteis(new Date(), this.data_vencimento);
+      var DU = dias_uteis(this.data_base, this.data_vencimento);
       var VF = 1000;
 
       var _PU = VP(VF, DU, i);
@@ -109,7 +109,7 @@
 function d(ano, mes, dia) { return new Date(ano, mes-1, dia, 12, 0, 0); }
 function getFeriados() {
   /*
-   * Array com feriados brasileiros
+   * Array com feriados brasileiros, sem fim de semana
    * fonte: http://www.anbima.com.br/feriados/feriados.asp
    */
   var feriados = [
